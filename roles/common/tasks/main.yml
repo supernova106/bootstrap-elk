@@ -1,0 +1,39 @@
+---
+- name: install system packages
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+  - build-essential 
+  - python-dev 
+  - python-pip 
+  - bridge-utils 
+  - ntp 
+  - zip 
+  - unzip 
+  - curl
+  - git
+  - jq
+  - openjdk-7-jre-headless
+  - libzmq1
+  tags:
+    - common
+
+- name: install latest awscli boto docker_py
+  become: yes
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  - awscli
+  - boto
+  - docker_py
+  tags:
+    - common
+
+- include: ulimit.yml
+- include: kernel.yml
+- include: supervisord.yml

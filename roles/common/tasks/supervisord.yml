@@ -1,0 +1,26 @@
+---
+- name: install supervisord
+  become: yes
+  pip: "name=supervisor version={{ supervisord_version }}"
+  tags:
+    - common
+
+- name: ensuring required supervisord directories
+  become: yes
+  file: "path={{ supervisord_conf_dir }} state=directory"
+
+- name: add supervisord config
+  become: yes
+  template: src=supervisord.conf.j2 dest=/etc/supervisord.conf
+  notify:
+    - start supervisord
+
+- name: check supervisord running
+  become: yes
+  shell: "ps aux"
+  register: check_supervisord_running
+
+- name: run supervisord if not running
+  become: yes
+  shell: "{{ supervisord_exec_dir }}/supervisord -c /etc/supervisord.conf"
+  when: check_supervisord_running.stdout.find('supervisord') == -1

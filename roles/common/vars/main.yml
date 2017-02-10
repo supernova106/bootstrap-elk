@@ -1,0 +1,10 @@
+---
+# vars file for common
+
+# supervisord
+supervisord_version: 3.3.1
+supervisord_conf_dir: /etc/supervisord
+supervisord_exec_dir: /usr/local/bin
+supervisord_port: 40001
+supervisord_admin_user: admin
+supervisord_admin_password: password
