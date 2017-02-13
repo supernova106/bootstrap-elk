@@ -1,1 +1,2 @@
 terraform/*.tfstate*
+roles/fluentd/defaults/*.yml
