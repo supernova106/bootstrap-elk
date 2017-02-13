@@ -9,6 +9,10 @@
   become: yes
   file: "path={{ supervisord_conf_dir }} state=directory"
 
+- name: ensuring required supervisord customized bin directories
+  become: yes
+  file: "path={{ customized_bin_dir }} state=directory"
+
 - name: add supervisord config
   become: yes
   template: src=supervisord.conf.j2 dest=/etc/supervisord.conf

@@ -1,0 +1,45 @@
+---
+- name: pull an image
+  become: yes
+  docker_image:
+    name: "{{ fluentd_master_image }}"
+    tag: lastest
+    timeout: 300
+
+- name: setup fluentd master supervisord config
+  become: yes
+  template:
+    src: fluentd_master_supervisord.conf.j2
+    dest: "{{ supervisord_conf_dir }}/fluentd_master.conf"
+  notify:
+    - reload supervisord 
+    - restart fluentd master
+  tags:
+    - fluentd_master
+
+- name: setup fluentd master start up script
+  become: yes
+  template:
+    src: start_fluentd_master.sh.j2
+    dest: "{{ customized_bin_dir }}/start_fluentd_master.sh"
+    mode: 0755
+  notify: reload supervisord
+  tags:
+    - fluentd_master
+
+- name: ensure fluentd config directory
+  become: yes
+  file:
+    path: "/etc/fluentd"
+    state: directory
+  tags:
+    - fluentd_master
+
+- name: setup fluentd master config
+  become: yes
+  template:
+    src: fluentd_master.conf.j2
+    dest: "/etc/fluentd/fluentd_master.conf"
+  notify: restart fluentd master
+  tags:
+    - fluentd_master

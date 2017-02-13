@@ -20,7 +20,7 @@
   - openjdk-7-jre-headless
   - libzmq1
   tags:
-    - common
+    - bootstrap
 
 - name: install latest awscli boto docker_py
   become: yes
@@ -32,8 +32,13 @@
   - boto
   - docker_py
   tags:
-    - common
+    - bootstrap
+
+- name: rc_local file
+  become: yes
+  template: src=rc.local.j2 dest=/etc/rc.local
 
 - include: ulimit.yml
 - include: kernel.yml
+- include: docker.yml
 - include: supervisord.yml

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+service docker stop
+ip link set docker0 down
+brctl delbr docker0
+
+service docker start
+{{ supervisord_exec_dir }}/supervisord

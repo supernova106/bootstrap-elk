@@ -11,3 +11,9 @@
   sudo: yes
   shell: "{{ supervisord_exec_dir }}/supervisorctl reload"
   when: start_supervisord|failed
+
+- name: restart docker
+  become: yes
+  service:
+    name: docker
+    state: restarted

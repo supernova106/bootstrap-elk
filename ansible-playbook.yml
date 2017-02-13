@@ -1,0 +1,11 @@
+---
+- hosts: all
+  roles:
+    - common
+    - logrotate
+
+- hosts: "role=fluentd-master"
+  become: yes
+  roles:
+    - { role: fluentd, tags: ["fluentd_master", "elasticsearch"] }
+

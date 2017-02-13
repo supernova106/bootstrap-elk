@@ -1,0 +1,40 @@
+<source>
+  @type forward
+  port 24224
+</source>
+
+<match nginx.**>
+  @type elasticsearch
+  type_name "nginx_log"
+  logstash_format true
+  include_tag_key true
+  tag_key "@log_name"
+  flush_interval 10s
+  reload_connections false
+  reload_on_failure true
+  hosts {{ elasticsearch_host }}:{{ elasticsearch_port }}
+</match>
+
+<match docker.**>
+  @type elasticsearch
+  type_name "docker_log"
+  logstash_format true
+  include_tag_key true
+  tag_key "@log_name"
+  flush_interval 10s
+  reload_connections false
+  reload_on_failure true
+  hosts {{ elasticsearch_host }}:{{ elasticsearch_port }}
+</match>
+
+<match app.**>
+  @type elasticsearch
+  type_name "error_log"
+  logstash_format true
+  include_tag_key true
+  tag_key "@log_name"
+  flush_interval 10s
+  reload_connections false
+  reload_on_failure true
+  hosts {{ elasticsearch_host }}:{{ elasticsearch_port }}
+</match>

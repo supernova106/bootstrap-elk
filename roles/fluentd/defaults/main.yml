@@ -1,0 +1,12 @@
+---
+# defaults file for fluentd
+fluentd_master_image: supernova106/fluentd-agent
+fluentd_master_tag: latest
+elasticsearch_host: localhost
+elasticsearch_port: 443
+
+supervisord_conf_dir: /etc/supervisord
+supervisord_exec_dir: /usr/local/bin
+customized_bin_dir: /opt/bin
+
+elasticsearch_conf_dir: /etc/elasticsearch

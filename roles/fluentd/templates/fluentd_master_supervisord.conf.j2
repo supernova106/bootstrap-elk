@@ -1,0 +1,12 @@
+[program:fluentd_master]
+command= /opt/bin/start_fluentd_master.sh
+autostart=true
+autorestart=true
+startretries=999
+redirect_stderr=True
+nodaemon = False
+debug = False
+stdout_logfile = /var/tmp/fluentd_master.out
+stderr_logfile = /var/tmp/fluentd_master.err
+loglevel = "info"
+stopasgroup=true

@@ -1,0 +1,18 @@
+---
+- name: restart fluentd master
+  become: yes
+  supervisorctl: 
+    name: fluentd_master
+    state: restarted
+    supervisorctl_path: "{{ supervisord_exec_dir }}/supervisorctl"
+
+- name: reload supervisord
+  become: yes
+  shell: "{{ supervisord_exec_dir }}/supervisorctl reload"
+  when: start_supervisord|failed
+
+- name: post to elasticsearch
+  become: yes
+  shell: "curl -XPUT {{ elasticsearch_host }}/_template/template_1 -H 'Content-Type: application/json' -d@{{ elasticsearch_conf_dir }}/elasticsearch-template.json"
+  register: curl_response
+  ignore_errors: True

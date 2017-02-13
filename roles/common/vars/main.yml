@@ -8,3 +8,5 @@ supervisord_exec_dir: /usr/local/bin
 supervisord_port: 40001
 supervisord_admin_user: admin
 supervisord_admin_password: password
+
+customized_bin_dir: /opt/bin

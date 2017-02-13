@@ -1,0 +1,7 @@
+---
+- name: install latest docker
+  become: yes
+  shell: "curl -sSL https://get.docker.com/ | sh"
+  tags:
+    - bootstrap
+    - docker

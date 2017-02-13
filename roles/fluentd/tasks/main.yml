@@ -1,0 +1,22 @@
+---
+# tasks file for fluentd
+- include: fluentd_master.yml
+
+- name: ensure config directory for elasticsearch
+  become: yes
+  file:
+    path: "{{ elasticsearch_conf_dir }}"
+    state: directory
+  tags:
+    - elasticsearch
+
+- name: copy mapping template to elasticsearch 5.x
+  become: yes
+  copy:
+    src: elasticsearch-template-es5x.json
+    dest: "{{ elasticsearch_conf_dir }}/elasticsearch-template.json"
+  notify:
+    - post to elasticsearch
+  tags:
+    - elasticsearch
+  

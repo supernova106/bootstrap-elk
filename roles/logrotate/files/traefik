@@ -1,0 +1,12 @@
+/var/tmp/*.log {
+    missingok
+    weekly
+    compress
+    delaycompress
+    notifempty
+    rotate 4
+    sharedscripts
+    postrotate
+        /usr/bin/docker restart traefik
+    endscript
+}
