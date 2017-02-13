@@ -1,0 +1,12 @@
+[program:fluentd_agent]
+command= {{ customized_bin_dir }}/start_fluentd_agent.sh
+autostart=true
+autorestart=true
+startretries=999
+redirect_stderr=True
+nodaemon = False
+debug = False
+stdout_logfile = /var/tmp/fluentd_agent.out
+stderr_logfile = /var/tmp/fluentd_agent.err
+loglevel = "info"
+stopasgroup=true

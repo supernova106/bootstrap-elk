@@ -1,0 +1,37 @@
+- name: setup fluentd agent supervisord config
+  become: yes
+  template:
+    src: fluentd_agent_supervisord.conf.j2
+    dest: "{{ supervisord_conf_dir }}/fluentd_agent.conf"
+  notify:
+    - reload supervisord 
+    - restart fluentd agent
+  tags:
+    - fluentd_agent
+
+- name: setup fluentd agent start up script
+  become: yes
+  template:
+    src: start_fluentd_agent.sh.j2
+    dest: "{{ customized_bin_dir }}/start_fluentd_agent.sh"
+    mode: 0755
+  notify: reload supervisord
+  tags:
+    - fluentd_agent
+
+- name: ensure fluentd config directory
+  become: yes
+  file:
+    path: "/etc/fluentd"
+    state: directory
+  tags:
+    - fluentd_agent
+
+- name: setup fluentd agent config
+  become: yes
+  template:
+    src: fluentd_agent.conf.j2
+    dest: "/etc/fluentd/fluentd_agent.conf"
+  notify: restart fluentd agent
+  tags:
+    - fluentd_agent

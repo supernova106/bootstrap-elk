@@ -1,5 +1,5 @@
 [program:fluentd_master]
-command= /opt/bin/start_fluentd_master.sh
+command= {{ customized_bin_dir }}/start_fluentd_master.sh
 autostart=true
 autorestart=true
 startretries=999

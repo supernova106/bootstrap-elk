@@ -1,0 +1,8 @@
+#!/bin/bash
+CONTAINER_NAME=fluentd_agent
+docker rm -f ${CONTAINER_NAME}
+docker run -i \
+	--name=${CONTAINER_NAME} \
+	-v /etc/fluentd/fluentd_agent.conf:/fluentd/etc/fluent.conf \
+	-v {{ path_to_log_dir }}:/fluentd/log/{{ app_name }}/ \
+	{{ fluentd_agent_image }}:{{ fluentd_agent_tag }}

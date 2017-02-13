@@ -9,3 +9,10 @@
   roles:
     - { role: fluentd, tags: ["fluentd_master", "elasticsearch"] }
 
+# hardcode in /etc/ansible/hosts
+# need to specify ssh user name and the private keys to the existing instances
+
+#- hosts: "role=fluentd-agent"
+# become: yes
+# roles:
+#  - { role: fluentd, tags: ["fluentd_agent"] }
