@@ -2,7 +2,7 @@
 # defaults file for fluentd
 fluentd_master_image: supernova106/fluentd-agent
 fluentd_master_tag: latest
-elasticsearch_host: localhost
+elasticsearch_host: https://search-elk-log-o72a6stlx6hhaffon6gu67q65u.us-east-1.es.amazonaws.com
 elasticsearch_port: 443
 
 supervisord_conf_dir: /etc/supervisord
@@ -12,7 +12,7 @@ customized_bin_dir: /opt/bin
 elasticsearch_conf_dir: /etc/elasticsearch
 
 # fluentd agent
-fluentd_master_host: localhost
+fluentd_master_host: http://log.razersynapse.com
 fluentd_master_port: 24224
 path_to_log_dir: #/var/log/app/
 log_name: #error.log

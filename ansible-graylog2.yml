@@ -1,0 +1,40 @@
+---
+- hosts: "role=fluentd-master"
+  remote_user: ubuntu
+  become: yes
+
+  vars:
+    # Graylog2 is not compatible with elasticsearch 5.x, so ensure to use 2.x (graylog3 will be compatible)
+    # Also use version 0.2 of elastic.elasticsearch (ansible role), because vars are different
+    es_major_version: "2.x"
+    es_version: "2.4.3"
+
+    es_instance_name: 'graylog'
+    es_scripts: False
+    es_templates: False
+    es_version_lock: False
+    es_heap_size: 1g
+
+    es_config: {
+      node.name: "graylog",
+      cluster.name: "graylog",
+      discovery.zen.ping.unicast.hosts: "localhost:9301",
+      http.port: 9200,
+      transport.tcp.port: 9300,
+      network.host: 0.0.0.0,
+      node.data: true,
+      node.master: true,
+      bootstrap.mlockall: false,
+      discovery.zen.ping.multicast.enabled: false
+    }
+
+    # Do not set web_endpoint_uri to choose the first ip address available automatically
+    graylog_web_endpoint_uri: ''
+    # Option 2:
+    # graylog_web_endpoint_uri: 'http://{{ ansible_host }}:9000/api/'
+    # Note: if you set here localhost or 127.0.0.1 the web interface will never reach your webui as client
+    # runs with javascript on your browser since graylog 2.0
+
+  roles:
+    - role: 'Graylog2.graylog-ansible-role'
+      tags: graylog
