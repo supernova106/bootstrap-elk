@@ -10,7 +10,7 @@
 - install graylog2 ansible role: `ansible-galaxy install -n -p ./roles Graylog2.graylog-ansible-role`
 - Setup dependencies: `ansible-galaxy install -r roles/Graylog2.graylog-ansible-role/requirements.yml -p ./roles`
 - provision ansible-graylog2.yml to your ubuntu box
-- Note to update `rest_transport_uri = http://127.0.0.1:12900/` to `rest_transport_uri = http://<IPV4>:9000/api/`
+- Note to update `graylog.server.conf` `rest_transport_uri = http://127.0.0.1:12900/` to `rest_transport_uri = http://<IPV4>:9000/api/`
 - follow http://www.fluentd.org/guides/recipes/graylog2 to install and configure Fluentd agent
 - make sure the all the needed ports are accessible
 
