@@ -17,4 +17,3 @@ fluentd_master_port: 24224
 path_to_log_dir: #/var/log/app/
 log_name: #error.log
 app_name: rz_app
-regex_format: /^(?<user_ip>[\d\.]*).*\[(?<time>[^\[]*)\]\s\"(?<request>[^\"]*)\"\s(?<code>[\d]*)\s.*\s\d*\s\"(?<apiname>[^\"]*)\"\s\"(?<backend>.*)\"\s(?<request_time>.*)ms$/

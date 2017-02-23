@@ -4,7 +4,6 @@
   pos_file /fluentd/log/{{ app_name }}/{{ log_name }}.pos # This is where you record file position
   tag "app.error"
   time_format %d/%b/%Y:%H:%M:%S %z
-  format {{ regex_format }}
 </source>
 
 <match app.*>
